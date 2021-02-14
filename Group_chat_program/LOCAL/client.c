@@ -32,7 +32,17 @@ void *write_func(void *arg)
 {
     char str[100];
     fflush(stdout);
-	scanf("%[^\n]%*c", str);
+    fflush(stdin);
+	scanf(" %[^\n]%*c", str);
+  printf("what kind of message do you want to send?\n");
+  scanf("%c",&str[97]);
+  // printf("----%c", str[97]);
+  if(str[97] == 'D')
+  {
+    printf("Give the ID of the user..\n");
+    scanf(" %c",&str[98]);
+    // printf("-------- %c \n", str[98]);
+  }
     str[99] = id[0];
 	write(sockfd, str, 100);
     if(strcmp(str,"EXIT")==0)
@@ -59,6 +69,7 @@ int main()
 
     serv_addr.sin_family = AF_INET;
     inet_pton(AF_INET, "3.141.5.64", &serv_addr.sin_addr);
+    // serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     serv_addr.sin_port = htons(5555);
 
     printf("Initiating connection \n");

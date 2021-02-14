@@ -29,9 +29,21 @@ void *read_func(void *arg)
         close(connfd[k]);
         return (NULL);
     }
-    for(l=0;l<i;l++)
-        if(l!=k)
-            write(connfd[l], str, 100);
+    if(str[97] == 'G')
+    {
+      // printf("Entered G \n");
+      for(l=0;l<i;l++)
+          if(l!=k)
+              write(connfd[l], str, 100);
+    }
+    else
+    {
+      int p = str[98]-'0';
+      // printf("%c ..\n", str[98]);
+      // printf("....%d \n", p);
+      write(connfd[p], str, 100);
+    }
+
 	printf("%c says: %s\n",str[99],str);
     pthread_create(&thread1[k],NULL,read_func,(void *)&k);;
 	return (NULL);
